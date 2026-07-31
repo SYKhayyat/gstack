@@ -77,6 +77,11 @@ export function spawnTerminalAgent(opts: {
       ...(opts.extraEnv || {}),
     },
     stdio: ['ignore', 'ignore', 'ignore'],
+    // Without this, Windows allocates a console for the child and pops it to
+    // the FOREGROUND, stealing focus from whatever the user is typing into.
+    // The agent is a background daemon with all three stdio streams already
+    // ignored, so it has nothing to show. Harmless no-op on macOS/Linux.
+    windowsHide: true,
   });
   proc.unref?.();
   return proc.pid ?? null;
