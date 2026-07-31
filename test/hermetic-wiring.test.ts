@@ -17,7 +17,7 @@ import { describe, test, expect } from 'bun:test';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const ROOT = path.resolve(new URL(import.meta.url).pathname, '..', '..');
+const ROOT = path.resolve(import.meta.path, '..', '..');
 
 const RUNNERS = [
   'test/helpers/session-runner.ts',
